@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+
+
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile_nginx
+    ports:
+      - "7777:80"
+    depends_on:
+      - extreme-task
+
+
+  extreme-task:
+    build:
+      context: .
+    command: >
+      sh -c "gunicorn --workers=4 --bind :8080 extreme_consulting_task.wsgi:application"

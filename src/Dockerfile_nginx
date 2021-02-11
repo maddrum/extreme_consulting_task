@@ -1,0 +1,2 @@
+FROM nginx
+COPY __docker/nginx/extreme_task.conf /etc/nginx/conf.d/default.conf

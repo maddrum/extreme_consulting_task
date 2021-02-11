@@ -8,7 +8,7 @@ SECRET_KEY = 'n7ioxb8jdnxibmaz&2gyh*-6+hrv#q&bko-h^5da^l+$qqqx^8'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['extreme-task', 'localhost', '127.0.0.1', ]
 
 # Application definition
 
