@@ -1,7 +1,8 @@
 from django.urls import reverse_lazy
-from django.views.generic import FormView
 from django.utils.translation import ugettext_lazy as _
-from . import forms
+from django.views.generic import FormView
+
+from calculator import forms
 
 
 class CalculatorView(FormView):
@@ -13,6 +14,13 @@ class CalculatorView(FormView):
 
     @staticmethod
     def calculate_result(a, b, operator):
+        """
+        :param a: - number a
+        :param b:  - number b
+        :param operator: math operator - "+", "-", "*", "/"
+        :return: result of the math operation or None on wrong data
+        """
+
         result = None
         if operator == '+':
             result = a + b
