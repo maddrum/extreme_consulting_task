@@ -12,7 +12,23 @@ class CalculationForm(forms.Form):
         ("/", _('Division')),
 
     )
-    number_A = forms.FloatField()
-    number_B = forms.FloatField()
+    number_a = forms.FloatField()
+    number_b = forms.FloatField()
     operator = forms.ChoiceField(choices=OPERATOR_CHOICES)
 
+    # validate numbers
+    def clean_number_a(self):
+        number_a = self.cleaned_data['number_a']
+        try:
+            float(number_a)
+        except ValueError:
+            raise forms.ValidationError('Invalid number A', code=1)
+        return number_a
+
+    def clean_number_b(self):
+        number_b = self.cleaned_data['number_b']
+        try:
+            float(number_b)
+        except ValueError:
+            raise forms.ValidationError('Invalid number B', code=2)
+        return number_b
