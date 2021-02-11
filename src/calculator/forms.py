@@ -22,7 +22,7 @@ class CalculationForm(forms.Form):
         try:
             float(number_a)
         except ValueError:
-            raise forms.ValidationError('Invalid number A', code=1)
+            raise forms.ValidationError(_('Invalid number A'), code=1)
         return number_a
 
     def clean_number_b(self):
@@ -30,5 +30,5 @@ class CalculationForm(forms.Form):
         try:
             float(number_b)
         except ValueError:
-            raise forms.ValidationError('Invalid number B', code=2)
+            raise forms.ValidationError(_('Invalid number B'), code=2)
         return number_b

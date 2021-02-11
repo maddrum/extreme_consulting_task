@@ -1,8 +1,18 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load humanize %}
 {% block content %}
+    {% if result is not None %}
+        <h1>
+            {% trans 'The result is: ' %}{{ result|floatformat:4|intcomma }}
+        </h1>
+    {% endif %}
     <h1>
         {% trans 'Top Calculator' %}
     </h1>
-    {{ form.as_p }}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">{% trans 'Execute' %}</button>
+    </form>
 {% endblock %}
