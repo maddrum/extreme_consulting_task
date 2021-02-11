@@ -32,3 +32,12 @@ class CalculationForm(forms.Form):
         except ValueError:
             raise forms.ValidationError(_('Invalid number B'), code=2)
         return number_b
+
+    def clean(self):
+        cleaned_data = super().clean()
+        number_b = cleaned_data.get('number_b', None)
+        if number_b is None:
+            return
+        operator = cleaned_data.get('operator')
+        if operator == '/' and number_b == 0:
+            raise forms.ValidationError('Division by zero', code=3)
