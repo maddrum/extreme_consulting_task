@@ -3,7 +3,7 @@ from rest_framework.status import HTTP_200_OK, HTTP_422_UNPROCESSABLE_ENTITY
 from rest_framework.views import APIView
 
 from api import serializers
-from calculator.views import CalculatorView
+from common_modules.calculator_module import Calculator
 
 
 class RestCalculatorView(APIView):
@@ -21,7 +21,8 @@ class RestCalculatorView(APIView):
         number_a = float(request.data.get('number_a'))
         number_b = float(request.data.get('number_b'))
         operator = request.data.get('operator')
-        calculation_result = CalculatorView().calculate_result(a=number_a, b=number_b, operator=operator)
+        calculator = Calculator(number_a=number_a, number_b=number_b, operator=operator)
+        calculation_result = calculator.calculate_result()
         # handle ok result
         data['result'] = calculation_result
         return Response(data, status=HTTP_200_OK)

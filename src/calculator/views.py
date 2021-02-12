@@ -3,6 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.generic import FormView
 
 from calculator import forms
+from common_modules.calculator_module import Calculator
 
 
 class CalculatorView(FormView):
@@ -12,30 +13,12 @@ class CalculatorView(FormView):
     template_name = 'calculator/calculator.html'
     result = None
 
-    @staticmethod
-    def calculate_result(a, b, operator):
-        """
-        :param a: - number a
-        :param b:  - number b
-        :param operator: math operator - "+", "-", "*", "/"
-        :return: result of the math operation or None on wrong data
-        """
-
-        result = None
-        if operator == '+':
-            result = a + b
-        elif operator == '-':
-            result = a - b
-        elif operator == '*':
-            result = a * b
-        elif operator == '/':
-            result = a / b
-        return result
-
     def form_valid(self, form):
-        self.result = self.calculate_result(a=form.cleaned_data['number_a'],
-                                            b=form.cleaned_data['number_b'],
-                                            operator=form.cleaned_data['operator'])
+        """If no result - returns form_invalid"""
+        calculator = Calculator(number_a=form.cleaned_data['number_a'],
+                                number_b=form.cleaned_data['number_b'],
+                                operator=form.cleaned_data['operator'])
+        self.result = calculator.calculate_result()
         if self.result is None:
             form.add_error(None, _('General input data error'))
             return super().form_invalid(form)
