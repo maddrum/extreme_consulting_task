@@ -24,4 +24,5 @@ RUN chown -R python_user /usr/extreme_task
 # run as non root user
 USER python_user
 # migrate django
-RUN python manage.py migrate
+RUN cd /usr/extreme_task \
+    && python manage.py migrate
