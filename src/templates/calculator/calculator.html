@@ -15,4 +15,7 @@
         {{ form.as_p }}
         <button type="submit">{% trans 'Execute' %}</button>
     </form>
+    <br>
+    <br>
+    <a href="{% url 'html_static_content:index_page' %}">{% trans 'Back to beginning' %}</a>
 {% endblock %}
